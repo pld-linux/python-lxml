@@ -1,0 +1,22 @@
+diff -urN lxml-0.8.org/setup.py lxml-0.8/setup.py
+--- lxml-0.8.org/setup.py	2005-11-03 18:16:04.000000000 +0100
++++ lxml-0.8/setup.py	2006-03-09 22:05:39.000000000 +0100
+@@ -132,14 +132,15 @@
+             result.append(part[2:])
+     return result
+ 
+-include_dirs = guess_dirs('--cflags', '-I')
+-library_dirs = guess_dirs('--libs', '-L')
++#include_dirs = guess_dirs('--cflags', '-I')
++#library_dirs = guess_dirs('--libs', '-L')
+ # if you want to configure include and library dir manually, you can do
+ # so here, for instance:
+ # include_dirs = ['/home/faassen/tmp/local_new/include/libxml2',
+ #                '/home/faassen/tmp/local_new/include']
+ # library_dirs = ['/home/faassen/tmp/local_new/lib/']
+-
++include_dirs = [ '/usr/include/libxml2' ]
++library_dirs = [ '/usr/lib', '/usr/lib64' ]
+ 
+ ext_modules = [
+     Extension('lxml.etree',
