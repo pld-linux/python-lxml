@@ -5,7 +5,7 @@ Summary:	A Pythonic binding for the libxml2 and libxslt libraries
 Summary(pl):	Pythonowe wi±zanie do bibliotek libxml2 i libxslt
 Name:		python-%{module}
 Version:	0.8
-Release:	1
+Release:	2
 License:	BSD
 Group:		Development/Languages/Python
 Source0:	http://codespeak.net/lxml/%{module}-%{version}.tgz
@@ -14,7 +14,7 @@ Patch0:		%{name}-path.patch
 URL:		http://codespeak.net/lxml/
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-devel
-BuildRequires:	python-Pyrex
+BuildRequires:	python-Pyrex >= 0.9.4.2
 BuildRequires:	python-devel
 BuildRequires:	rpmbuild(macros) >= 1.219
 BuildRequires:	unzip
