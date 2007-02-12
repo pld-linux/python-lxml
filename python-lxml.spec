@@ -2,7 +2,7 @@
 %define		module	lxml
 #
 Summary:	A Pythonic binding for the libxml2 and libxslt libraries
-Summary(pl):	Pythonowe wi±zanie do bibliotek libxml2 i libxslt
+Summary(pl.UTF-8):   Pythonowe wiÄ…zanie do bibliotek libxml2 i libxslt
 Name:		python-%{module}
 Version:	0.8
 Release:	2
@@ -23,8 +23,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 lxml is a Pythonic binding for the libxml2 and libxslt libraries.
 
-%description -l pl
-lxml to pythonowe wi±zanie do bibliotek libxml2 i libxslt.
+%description -l pl.UTF-8
+lxml to pythonowe wiÄ…zanie do bibliotek libxml2 i libxslt.
 
 %prep
 %setup -q -n %{module}-%{version}
