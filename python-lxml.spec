@@ -2,7 +2,7 @@
 %define		module	lxml
 #
 Summary:	A Pythonic binding for the libxml2 and libxslt libraries
-Summary(pl.UTF-8):   Pythonowe wiązanie do bibliotek libxml2 i libxslt
+Summary(pl.UTF-8):	Pythonowe wiązanie do bibliotek libxml2 i libxslt
 Name:		python-%{module}
 Version:	0.8
 Release:	2
