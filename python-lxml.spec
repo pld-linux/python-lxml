@@ -52,4 +52,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/lxml/etree.so
 %attr(755,root,root) %{py_sitedir}/lxml/objectify.so
 %attr(755,root,root) %{py_sitedir}/lxml/pyclasslookup.so
-%{py_sitedir}/lxml-*-py2.5.egg-info
+%{py_sitedir}/lxml-*.egg-info
