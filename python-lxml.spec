@@ -4,12 +4,12 @@
 Summary:	A Pythonic binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Pythonowe wiązanie do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	2.0.5
-Release:	2
+Version:	2.1.4
+Release:	1
 License:	BSD
 Group:		Development/Languages/Python
 Source0:	http://codespeak.net/lxml/%{module}-%{version}.tgz
-# Source0-md5:	2cc8caf84c3b55353d5513c6d668c090
+# Source0-md5:	05f35b81955caf502584b685a5226417
 URL:		http://codespeak.net/lxml/
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-devel
@@ -51,5 +51,4 @@ rm -rf $RPM_BUILD_ROOT
 %{py_sitedir}/lxml/html/*.py[co]
 %attr(755,root,root) %{py_sitedir}/lxml/etree.so
 %attr(755,root,root) %{py_sitedir}/lxml/objectify.so
-%attr(755,root,root) %{py_sitedir}/lxml/pyclasslookup.so
 %{py_sitedir}/lxml-*.egg-info
