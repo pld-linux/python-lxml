@@ -7,7 +7,7 @@ Name:		python-%{module}
 Version:	2.1.5
 Release:	1
 License:	BSD
-Group:		Development/Languages/Python
+Group:		Libraries/Python
 Source0:	http://codespeak.net/lxml/%{module}-%{version}.tgz
 # Source0-md5:	22567ccc6ab8ec8c90c335c810cabe11
 URL:		http://codespeak.net/lxml/
