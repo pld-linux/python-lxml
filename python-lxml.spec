@@ -1,13 +1,15 @@
 #
-%bcond_without	python3
-%bcond_without	python2
+# Conditional build:
+%bcond_without	apidocs		# do not build and package API docs
+%bcond_without	python3		# Python 3 package
+%bcond_without	python2		# Python 2 package
+
 %define		module	lxml
-#
 Summary:	A Pythonic binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Pythonowe wiązanie do bibliotek libxml2 i libxslt
 Name:		python-%{module}
 Version:	2.2.7
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries/Python
 Source0:	http://codespeak.net/lxml/%{module}-%{version}.tgz
@@ -48,6 +50,14 @@ lxml is a Pythonic binding for the libxml2 and libxslt libraries.
 %description -n python3-%{module} -l pl.UTF-8
 lxml to pythonowe wiązanie do bibliotek libxml2 i libxslt.
 
+%package apidocs
+Summary:	lxml API documentation
+Summary(pl.UTF-8):	Dokumentacja API biblioteki lxml
+Group:		Documentation
+
+%description apidocs
+API and internal documentation for lxml library.
+
 %prep
 %setup -q -n %{module}-%{version}
 %patch0 -p1
@@ -81,13 +91,23 @@ rm -rf $RPM_BUILD_ROOT
 %py3_postclean
 %endif
 
+# cleanup for packaging
+rm -rf docs
+cp -a doc docs
+# apidocs packaged separately
+rm -rf docs/html
+# build docs not useful at runtime
+rm docs/build.txt
+# common licenses
+rm docs/licenses/{BSD,GPL}.txt
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc doc/* CHANGES.txt CREDITS.txt TODO.txt
+%doc docs/* CHANGES.txt CREDITS.txt TODO.txt
 %dir %{py_sitedir}/lxml
 %{py_sitedir}/lxml/*.py[co]
 %dir %{py_sitedir}/lxml/html
@@ -100,7 +120,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc doc/* CHANGES.txt CREDITS.txt TODO.txt
+%doc docs/* CHANGES.txt CREDITS.txt TODO.txt
 %dir %{py3_sitedir}/lxml
 %{py3_sitedir}/lxml/*.py[co]
 %dir %{py3_sitedir}/lxml/html
@@ -108,4 +128,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py3_sitedir}/lxml/etree.so
 %attr(755,root,root) %{py3_sitedir}/lxml/objectify.so
 %{py3_sitedir}/lxml-*.egg-info
+%endif
+
+%if %{with apidocs}
+%files apidocs
+%defattr(644,root,root,755)
+%doc doc/html/*
 %endif
