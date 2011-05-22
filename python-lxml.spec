@@ -8,13 +8,12 @@
 Summary:	A Pythonic binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Pythonowe wiązanie do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	2.2.8
-Release:	2
+Version:	2.3
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 Source0:	http://codespeak.net/lxml/%{module}-%{version}.tgz
-# Source0-md5:	d6c612d63a84d79440912a1b29d3b981
-Patch0:		python3.patch
+# Source0-md5:	a245a015fd59b63e220005f263e1682a
 URL:		http://codespeak.net/lxml/
 BuildRequires:	libxml2-devel
 BuildRequires:	libxslt-devel
@@ -60,7 +59,6 @@ API and internal documentation for lxml library.
 
 %prep
 %setup -q -n %{module}-%{version}
-%patch0 -p1
 
 %build
 %if %{with python2}
@@ -87,8 +85,6 @@ rm -rf $RPM_BUILD_ROOT
 	install \
 	--root=$RPM_BUILD_ROOT \
 	--optimize=2
-
-%py3_postclean
 %endif
 
 # cleanup for packaging
@@ -110,6 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/* CHANGES.txt CREDITS.txt TODO.txt
 %dir %{py_sitedir}/lxml
 %{py_sitedir}/lxml/*.py[co]
+%{py_sitedir}/lxml/isoschematron
 %dir %{py_sitedir}/lxml/html
 %{py_sitedir}/lxml/html/*.py[co]
 %attr(755,root,root) %{py_sitedir}/lxml/etree.so
@@ -122,11 +119,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc docs/* CHANGES.txt CREDITS.txt TODO.txt
 %dir %{py3_sitedir}/lxml
-%{py3_sitedir}/lxml/*.py[co]
-%dir %{py3_sitedir}/lxml/html
-%{py3_sitedir}/lxml/html/*.py[co]
-%attr(755,root,root) %{py3_sitedir}/lxml/etree.so
-%attr(755,root,root) %{py3_sitedir}/lxml/objectify.so
+%attr(755,root,root) %{py3_sitedir}/lxml/*.so
+%{py3_sitedir}/lxml/__pycache__
+%{py3_sitedir}/lxml/*.py
+%{py3_sitedir}/lxml/isoschematron
+%{py3_sitedir}/lxml/html
 %{py3_sitedir}/lxml-*.egg-info
 %endif
 
