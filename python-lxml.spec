@@ -120,7 +120,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/* CHANGES.txt CREDITS.txt TODO.txt
 %dir %{py3_sitedir}/lxml
 %attr(755,root,root) %{py3_sitedir}/lxml/*.so
-%{py3_sitedir}/lxml/__pycache__
 %{py3_sitedir}/lxml/*.py
 %{py3_sitedir}/lxml/isoschematron
 %{py3_sitedir}/lxml/html
