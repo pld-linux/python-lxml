@@ -9,7 +9,7 @@ Summary:	A Pythonic binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Pythonowe wiązanie do bibliotek libxml2 i libxslt
 Name:		python-%{module}
 Version:	2.3
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries/Python
 Source0:	http://codespeak.net/lxml/%{module}-%{version}.tgz
@@ -121,6 +121,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{py3_sitedir}/lxml
 %attr(755,root,root) %{py3_sitedir}/lxml/*.so
 %{py3_sitedir}/lxml/*.py
+%{py3_sitedir}/lxml/__pycache__
 %{py3_sitedir}/lxml/isoschematron
 %{py3_sitedir}/lxml/html
 %{py3_sitedir}/lxml-*.egg-info
