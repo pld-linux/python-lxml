@@ -1,12 +1,12 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
-%bcond_without	python3		# Python 3 package
 %bcond_without	python2		# Python 2 package
+%bcond_without	python3		# Python 3 package
 
 %define		module	lxml
-Summary:	A Pythonic binding for the libxml2 and libxslt libraries
-Summary(pl.UTF-8):	Pythonowe wiązanie do bibliotek libxml2 i libxslt
+Summary:	Python 2 binding for the libxml2 and libxslt libraries
+Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
 Version:	3.2.4
 Release:	1
@@ -15,10 +15,10 @@ Group:		Libraries/Python
 Source0:	http://lxml.de/files/%{module}-%{version}.tgz
 # Source0-md5:	cc363499060f615aca1ec8dcc04df331
 URL:		http://lxml.de/
-BuildRequires:	libxml2-devel
-BuildRequires:	libxslt-devel
+BuildRequires:	libxml2-devel >= 1:2.7.8
+BuildRequires:	libxslt-devel >= 1.1.26
 %if %{with python2}
-BuildRequires:	python-devel
+BuildRequires:	python-devel >= 1:2.4
 BuildRequires:	python-modules
 %endif
 %if %{with python3}
@@ -36,11 +36,9 @@ lxml is a Pythonic binding for the libxml2 and libxslt libraries.
 %description -l pl.UTF-8
 lxml to pythonowe wiązanie do bibliotek libxml2 i libxslt.
 
-%package -n	python3-%{module}
-Summary:	A Pythonic binding for the libxml2 and libxslt libraries
-Summary(pl.UTF-8):	Pythonowe wiązanie do bibliotek libxml2 i libxslt
-Version:	%{version}
-Release:	%{release}
+%package -n python3-%{module}
+Summary:	Python 3 binding for the libxml2 and libxslt libraries
+Summary(pl.UTF-8):	Wiązanie Pythona 3 do bibliotek libxml2 i libxslt
 Group:		Libraries/Python
 
 %description -n python3-%{module}
@@ -51,11 +49,14 @@ lxml to pythonowe wiązanie do bibliotek libxml2 i libxslt.
 
 %package apidocs
 Summary:	lxml API documentation
-Summary(pl.UTF-8):	Dokumentacja API biblioteki lxml
+Summary(pl.UTF-8):	Dokumentacja API modułu lxml
 Group:		Documentation
 
 %description apidocs
-API and internal documentation for lxml library.
+lxml API documentation.
+
+%description apidocs -l pl.UT8-8
+Dokumentacja API modułu lxml.
 
 %prep
 %setup -q -n %{module}-%{version}
@@ -103,9 +104,11 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc docs/* CHANGES.txt CREDITS.txt TODO.txt
+%doc docs/* CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt
 %dir %{py_sitedir}/lxml
 %{py_sitedir}/lxml/*.py[co]
+%{py_sitedir}/lxml/lxml.etree*.h
+%{py_sitedir}/lxml/includes
 %{py_sitedir}/lxml/isoschematron
 %dir %{py_sitedir}/lxml/html
 %{py_sitedir}/lxml/html/*.py[co]
@@ -117,11 +120,14 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc docs/* CHANGES.txt CREDITS.txt TODO.txt
+%doc docs/* CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt
 %dir %{py3_sitedir}/lxml
-%attr(755,root,root) %{py3_sitedir}/lxml/*.so
+%attr(755,root,root) %{py3_sitedir}/lxml/etree.cpython-*.so
+%attr(755,root,root) %{py3_sitedir}/lxml/objectify.cpython-*.so
 %{py3_sitedir}/lxml/*.py
 %{py3_sitedir}/lxml/__pycache__
+%{py3_sitedir}/lxml/lxml.etree*.h
+%{py3_sitedir}/lxml/includes
 %{py3_sitedir}/lxml/isoschematron
 %{py3_sitedir}/lxml/html
 %{py3_sitedir}/lxml-*.egg-info
