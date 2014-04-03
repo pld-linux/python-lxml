@@ -9,7 +9,7 @@ Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
 Version:	3.3.3
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries/Python
 Source0:	http://lxml.de/files/%{module}-%{version}.tgz
@@ -51,6 +51,9 @@ lxml to pythonowe wiązanie do bibliotek libxml2 i libxslt.
 Summary:	lxml API documentation
 Summary(pl.UTF-8):	Dokumentacja API modułu lxml
 Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 lxml API documentation.
