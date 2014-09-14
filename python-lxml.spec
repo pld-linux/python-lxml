@@ -18,13 +18,13 @@ URL:		http://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.7.8
 BuildRequires:	libxslt-devel >= 1.1.26
 %if %{with python2}
-BuildRequires:	python-devel >= 1:2.4
-BuildRequires:	python-modules
+BuildRequires:	python-devel >= 1:2.6
+BuildRequires:	python-modules >= 1:2.6
 %endif
 %if %{with python3}
 BuildRequires:	python3-Cython > 0.17
-BuildRequires:	python3-devel
-BuildRequires:	python3-modules
+BuildRequires:	python3-devel >= 1:3.2
+BuildRequires:	python3-modules >= 1:3.2
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.219
