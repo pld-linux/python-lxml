@@ -8,12 +8,12 @@
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	3.4.0
-Release:	3
+Version:	3.4.4
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 Source0:	http://lxml.de/files/%{module}-%{version}.tgz
-# Source0-md5:	bc90cc4e4ee04e1f8290ae0f70e34eea
+# Source0-md5:	a9a65972afc173ec7a39c585f4eea69c
 URL:		http://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.7.8
 BuildRequires:	libxslt-devel >= 1.1.26
