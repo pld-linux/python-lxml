@@ -15,8 +15,8 @@ Group:		Libraries/Python
 Source0:	http://lxml.de/files/%{module}-%{version}.tgz
 # Source0-md5:	5957cc384bd6e83934be35c057ec03b6
 URL:		http://lxml.de/
-BuildRequires:	libxml2-devel >= 1:2.7.8
-BuildRequires:	libxslt-devel >= 1.1.26
+BuildRequires:	libxml2-devel >= 1:2.9.2
+BuildRequires:	libxslt-devel >= 1.1.28
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.6
 BuildRequires:	python-modules >= 1:2.6
