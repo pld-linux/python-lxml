@@ -22,7 +22,7 @@ BuildRequires:	python-devel >= 1:2.6
 BuildRequires:	python-modules >= 1:2.6
 %endif
 %if %{with python3}
-BuildRequires:	python3-Cython > 0.17
+BuildRequires:	python3-Cython >= 0.17
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 %endif
