@@ -8,12 +8,12 @@
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	3.6.0
-Release:	2
+Version:	4.1.1
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 Source0:	http://lxml.de/files/%{module}-%{version}.tgz
-# Source0-md5:	5957cc384bd6e83934be35c057ec03b6
+# Source0-md5:	0265ad6701951347f2dbbb470e3d1512
 URL:		http://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
 BuildRequires:	libxslt-devel >= 1.1.28
@@ -104,14 +104,19 @@ rm -rf $RPM_BUILD_ROOT
 %doc docs/* CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt
 %dir %{py_sitedir}/lxml
 %{py_sitedir}/lxml/*.py[co]
+%{py_sitedir}/lxml/etree*.h
 %{py_sitedir}/lxml/lxml.etree*.h
 %{py_sitedir}/lxml/includes
 %{py_sitedir}/lxml/isoschematron
-%dir %{py_sitedir}/lxml/html
-%{py_sitedir}/lxml/html/*.py[co]
+%attr(755,root,root) %{py_sitedir}/lxml/_elementpath.so
+%attr(755,root,root) %{py_sitedir}/lxml/builder.so
 %attr(755,root,root) %{py_sitedir}/lxml/etree.so
 %attr(755,root,root) %{py_sitedir}/lxml/objectify.so
-%{py_sitedir}/lxml-*.egg-info
+%dir %{py_sitedir}/lxml/html
+%{py_sitedir}/lxml/html/*.py[co]
+%attr(755,root,root) %{py_sitedir}/lxml/html/clean.so
+%attr(755,root,root) %{py_sitedir}/lxml/html/diff.so
+%{py_sitedir}/lxml-%{version}-py*.egg-info
 %endif
 
 %if %{with python3}
@@ -119,15 +124,22 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc docs/* CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt
 %dir %{py3_sitedir}/lxml
+%attr(755,root,root) %{py3_sitedir}/lxml/_elementpath.cpython-*.so
+%attr(755,root,root) %{py3_sitedir}/lxml/builder.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/lxml/etree.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/lxml/objectify.cpython-*.so
 %{py3_sitedir}/lxml/*.py
 %{py3_sitedir}/lxml/__pycache__
+%{py3_sitedir}/lxml/etree*.h
 %{py3_sitedir}/lxml/lxml.etree*.h
 %{py3_sitedir}/lxml/includes
 %{py3_sitedir}/lxml/isoschematron
-%{py3_sitedir}/lxml/html
-%{py3_sitedir}/lxml-*.egg-info
+%dir %{py3_sitedir}/lxml/html
+%{py3_sitedir}/lxml/html/*.py
+%{py3_sitedir}/lxml/html/__pycache__
+%attr(755,root,root) %{py3_sitedir}/lxml/html/clean.cpython-*.so
+%attr(755,root,root) %{py3_sitedir}/lxml/html/diff.cpython-*.so
+%{py3_sitedir}/lxml-%{version}-py*.egg-info
 %endif
 
 %if %{with apidocs}
