@@ -1,30 +1,33 @@
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
+%bcond_without	apidocs		# API documentation
 %bcond_without	python2		# Python 2 package
 %bcond_without	python3		# Python 3 package
+%bcond_with	tests		# unit tests (don't work without lxml not installed?)
 
 %define		module	lxml
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	4.1.1
-Release:	2
+Version:	4.2.3
+Release:	1
 License:	BSD
 Group:		Libraries/Python
-Source0:	http://lxml.de/files/%{module}-%{version}.tgz
-# Source0-md5:	0265ad6701951347f2dbbb470e3d1512
-URL:		http://lxml.de/
+Source0:	https://lxml.de/files/%{module}-%{version}.tgz
+# Source0-md5:	40331e46f6aa49fd0e7043d82e58a879
+URL:		https://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
 BuildRequires:	libxslt-devel >= 1.1.28
 %if %{with python2}
 BuildRequires:	python-devel >= 1:2.6
 BuildRequires:	python-modules >= 1:2.6
+BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3-Cython >= 0.17
-BuildRequires:	python3-devel >= 1:3.2
-BuildRequires:	python3-modules >= 1:3.2
+BuildRequires:	python3-devel >= 1:3.3
+BuildRequires:	python3-modules >= 1:3.3
+BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.710
@@ -67,9 +70,20 @@ Dokumentacja API modułu lxml.
 %build
 %if %{with python2}
 %py_build
+
+%if %{with tests}
+PYTHONPATH=$(pwd)/$(echo build-2/lib.linux-*) \
+%{__python} test.py
 %endif
+%endif
+
 %if %{with python3}
 %py3_build
+
+%if %{with tests}
+PYTHONPATH=$(pwd)/$(echo build-3/lib.linux-*) \
+%{__python3} test.py
+%endif
 %endif
 
 %install
@@ -85,23 +99,13 @@ rm -rf $RPM_BUILD_ROOT
 %py3_install
 %endif
 
-# cleanup for packaging
-rm -rf docs
-cp -a doc docs
-# apidocs packaged separately
-rm -rf docs/html
-# build docs not useful at runtime
-rm docs/build.txt
-# common licenses
-rm docs/licenses/{BSD,GPL}.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc docs/* CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt
+%doc CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt doc/licenses/{BSD,ZopePublicLicense,elementtree}.txt
 %dir %{py_sitedir}/lxml
 %{py_sitedir}/lxml/*.py[co]
 %{py_sitedir}/lxml/etree*.h
@@ -122,7 +126,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc docs/* CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt
+%doc CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt doc/licenses/{BSD,ZopePublicLicense,elementtree}.txt
 %dir %{py3_sitedir}/lxml
 %attr(755,root,root) %{py3_sitedir}/lxml/_elementpath.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/lxml/builder.cpython-*.so
