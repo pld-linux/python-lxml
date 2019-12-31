@@ -3,28 +3,29 @@
 %bcond_without	apidocs		# API documentation
 %bcond_without	python2		# Python 2 package
 %bcond_without	python3		# Python 3 package
-%bcond_with	tests		# unit tests (don't work without lxml not installed?)
+%bcond_without	tests		# unit tests
 
 %define		module	lxml
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	4.2.5
-Release:	2
+Version:	4.4.2
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 Source0:	https://lxml.de/files/%{module}-%{version}.tgz
-# Source0-md5:	ce042575c4459c4994f68b9a862a72a4
+# Source0-md5:	235c1a22d97a174144e76b66ce62ae46
 URL:		https://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
 BuildRequires:	libxslt-devel >= 1.1.28
 %if %{with python2}
+BuildRequires:	python-Cython >= 0.29.7
 BuildRequires:	python-devel >= 1:2.6
 BuildRequires:	python-modules >= 1:2.6
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
-BuildRequires:	python3-Cython >= 0.17
+BuildRequires:	python3-Cython >= 0.29.7
 BuildRequires:	python3-devel >= 1:3.3
 BuildRequires:	python3-modules >= 1:3.3
 BuildRequires:	python3-setuptools
@@ -72,8 +73,14 @@ Dokumentacja API modułu lxml.
 %py_build
 
 %if %{with tests}
-PYTHONPATH=$(pwd)/$(echo build-2/lib.linux-*) \
-%{__python} test.py
+install -d testdir-2/src/lxml
+cd testdir-2/src/lxml
+ln -snf ../../../build-2/lib.linux-*/lxml/* ../../../src/lxml/tests .
+cd ../..
+ln -snf ../doc ../samples ../test.py .
+LC_ALL=C.UTF-8 \
+%{__python} test.py -v
+cd ..
 %endif
 %endif
 
@@ -81,9 +88,20 @@ PYTHONPATH=$(pwd)/$(echo build-2/lib.linux-*) \
 %py3_build
 
 %if %{with tests}
-PYTHONPATH=$(pwd)/$(echo build-3/lib.linux-*) \
-%{__python3} test.py
+install -d testdir-3/src/lxml
+cd testdir-3/src/lxml
+ln -snf ../../../build-3/lib.linux-*/lxml/* ../../../src/lxml/tests .
+cd ../..
+ln -snf ../doc ../samples ../test.py .
+%{__python3} test.py -v
+cd ..
 %endif
+%endif
+
+%if %{with apidocs}
+# as of 4.4.2, python3 is not supported in mkhtml.py
+PYTHONPATH=$(echo $(pwd)/build-2/lib.linux-*) \
+%{__python} doc/mkhtml.py doc/html $(pwd) %{version}
 %endif
 
 %install
@@ -116,6 +134,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py_sitedir}/lxml/builder.so
 %attr(755,root,root) %{py_sitedir}/lxml/etree.so
 %attr(755,root,root) %{py_sitedir}/lxml/objectify.so
+%attr(755,root,root) %{py_sitedir}/lxml/sax.so
 %dir %{py_sitedir}/lxml/html
 %{py_sitedir}/lxml/html/*.py[co]
 %attr(755,root,root) %{py_sitedir}/lxml/html/clean.so
@@ -132,6 +151,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py3_sitedir}/lxml/builder.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/lxml/etree.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/lxml/objectify.cpython-*.so
+%attr(755,root,root) %{py3_sitedir}/lxml/sax.cpython-*.so
 %{py3_sitedir}/lxml/*.py
 %{py3_sitedir}/lxml/__pycache__
 %{py3_sitedir}/lxml/etree*.h
