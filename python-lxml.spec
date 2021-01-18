@@ -9,29 +9,30 @@
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	4.4.2
+Version:	4.6.1
 Release:	1
 License:	BSD
 Group:		Libraries/Python
 Source0:	https://lxml.de/files/%{module}-%{version}.tgz
-# Source0-md5:	235c1a22d97a174144e76b66ce62ae46
+# Source0-md5:	10924ab543397a06cb4cfaf9bdf0b80f
 URL:		https://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
 BuildRequires:	libxslt-devel >= 1.1.28
+BuildRequires:	pkgconfig
 %if %{with python2}
 BuildRequires:	python-Cython >= 0.29.7
-BuildRequires:	python-devel >= 1:2.6
-BuildRequires:	python-modules >= 1:2.6
+BuildRequires:	python-devel >= 1:2.7
+BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
 BuildRequires:	python3-Cython >= 0.29.7
-BuildRequires:	python3-devel >= 1:3.3
-BuildRequires:	python3-modules >= 1:3.3
+BuildRequires:	python3-devel >= 1:3.5
+BuildRequires:	python3-modules >= 1:3.5
 BuildRequires:	python3-setuptools
 %endif
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.710
+BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,9 +56,7 @@ lxml to pythonowe wiązanie do bibliotek libxml2 i libxslt.
 Summary:	lxml API documentation
 Summary(pl.UTF-8):	Dokumentacja API modułu lxml
 Group:		Documentation
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description apidocs
 lxml API documentation.
