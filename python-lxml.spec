@@ -9,12 +9,15 @@
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	4.6.1
+Version:	4.6.2
 Release:	1
 License:	BSD
 Group:		Libraries/Python
-Source0:	https://lxml.de/files/%{module}-%{version}.tgz
-# Source0-md5:	10924ab543397a06cb4cfaf9bdf0b80f
+# until 4.6.1
+#Source0:	https://lxml.de/files/%{module}-%{version}.tgz
+#Source0Download: https://pypi.org/simple/lxml/
+Source0:	https://files.pythonhosted.org/packages/source/l/lxml/%{module}-%{version}.tar.gz
+# Source0-md5:	2e39c6e17d61f61e5be68fd328ba6a51
 URL:		https://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
 BuildRequires:	libxslt-devel >= 1.1.28
