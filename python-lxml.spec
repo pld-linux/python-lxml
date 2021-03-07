@@ -59,7 +59,7 @@ lxml to pythonowe wiązanie do bibliotek libxml2 i libxslt.
 Summary:	lxml API documentation
 Summary(pl.UTF-8):	Dokumentacja API modułu lxml
 Group:		Documentation
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description apidocs
 lxml API documentation.
