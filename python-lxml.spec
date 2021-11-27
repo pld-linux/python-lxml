@@ -9,15 +9,15 @@
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	4.6.2
-Release:	3
+Version:	4.6.4
+Release:	1
 License:	BSD
 Group:		Libraries/Python
 # until 4.6.1
 #Source0:	https://lxml.de/files/%{module}-%{version}.tgz
 #Source0Download: https://pypi.org/simple/lxml/
 Source0:	https://files.pythonhosted.org/packages/source/l/lxml/%{module}-%{version}.tar.gz
-# Source0-md5:	2e39c6e17d61f61e5be68fd328ba6a51
+# Source0-md5:	1e5354ce400123658b9e1079508fca52
 URL:		https://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
 BuildRequires:	libxslt-devel >= 1.1.28
@@ -125,7 +125,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python2}
 %files
 %defattr(644,root,root,755)
-%doc CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt doc/licenses/{BSD,ZopePublicLicense,elementtree}.txt
+%doc CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt doc/licenses/{BSD,elementtree}.txt
 %dir %{py_sitedir}/lxml
 %{py_sitedir}/lxml/*.py[co]
 %{py_sitedir}/lxml/etree*.h
@@ -147,7 +147,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with python3}
 %files -n python3-%{module}
 %defattr(644,root,root,755)
-%doc CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt doc/licenses/{BSD,ZopePublicLicense,elementtree}.txt
+%doc CHANGES.txt CREDITS.txt LICENSES.txt README.rst TODO.txt doc/licenses/{BSD,elementtree}.txt
 %dir %{py3_sitedir}/lxml
 %attr(755,root,root) %{py3_sitedir}/lxml/_elementpath.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/lxml/builder.cpython-*.so
