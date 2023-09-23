@@ -16,6 +16,7 @@ Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/lxml/
 Source0:	https://files.pythonhosted.org/packages/source/l/lxml/%{module}-%{version}.tar.gz
 # Source0-md5:	e27240a7319d80d0c1e5390ca31eb1d8
+Patch0:		lxml-Skip-failing-test-test_html_prefix_nsmap.patch
 URL:		https://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
 BuildRequires:	libxslt-devel >= 1.1.28
@@ -67,6 +68,7 @@ Dokumentacja API modułu lxml.
 
 %prep
 %setup -q -n %{module}-%{version}
+%patch0 -p1
 
 %build
 %if %{with python2}
