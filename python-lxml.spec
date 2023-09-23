@@ -9,13 +9,13 @@
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	4.9.1
+Version:	4.9.2
 Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/lxml/
 Source0:	https://files.pythonhosted.org/packages/source/l/lxml/%{module}-%{version}.tar.gz
-# Source0-md5:	e27240a7319d80d0c1e5390ca31eb1d8
+# Source0-md5:	aa84a7ce47581b43cb827145340505c6
 Patch0:		lxml-Skip-failing-test-test_html_prefix_nsmap.patch
 URL:		https://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
@@ -128,7 +128,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES.txt CREDITS.txt LICENSE.txt LICENSES.txt README.rst TODO.txt doc/licenses/{BSD,elementtree}.txt
 %dir %{py_sitedir}/lxml
+%{py_sitedir}/lxml/*.pxi
 %{py_sitedir}/lxml/*.py[co]
+%{py_sitedir}/lxml/etree.pyx
+%{py_sitedir}/lxml/objectify.pyx
 %{py_sitedir}/lxml/etree*.h
 %{py_sitedir}/lxml/lxml.etree*.h
 %{py_sitedir}/lxml/includes
@@ -155,8 +158,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{py3_sitedir}/lxml/etree.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/lxml/objectify.cpython-*.so
 %attr(755,root,root) %{py3_sitedir}/lxml/sax.cpython-*.so
+%{py3_sitedir}/lxml/*.pxi
 %{py3_sitedir}/lxml/*.py
 %{py3_sitedir}/lxml/__pycache__
+%{py3_sitedir}/lxml/etree.pyx
+%{py3_sitedir}/lxml/objectify.pyx
 %{py3_sitedir}/lxml/etree*.h
 %{py3_sitedir}/lxml/lxml.etree*.h
 %{py3_sitedir}/lxml/includes
