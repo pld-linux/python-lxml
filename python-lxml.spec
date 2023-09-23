@@ -9,26 +9,26 @@
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
-Version:	4.9.2
+Version:	4.9.3
 Release:	1
 License:	BSD
 Group:		Libraries/Python
 #Source0Download: https://pypi.org/simple/lxml/
 Source0:	https://files.pythonhosted.org/packages/source/l/lxml/%{module}-%{version}.tar.gz
-# Source0-md5:	aa84a7ce47581b43cb827145340505c6
+# Source0-md5:	7298fdca14b10e7b71547ed02b894b25
 Patch0:		lxml-Skip-failing-test-test_html_prefix_nsmap.patch
 URL:		https://lxml.de/
 BuildRequires:	libxml2-devel >= 1:2.9.2
 BuildRequires:	libxslt-devel >= 1.1.28
 BuildRequires:	pkgconfig
 %if %{with python2}
-BuildRequires:	python-Cython >= 0.29.30
+BuildRequires:	python-Cython >= 0.29.36-2
 BuildRequires:	python-devel >= 1:2.7
 BuildRequires:	python-modules >= 1:2.7
 BuildRequires:	python-setuptools
 %endif
 %if %{with python3}
-BuildRequires:	python3-Cython >= 0.29.30
+BuildRequires:	python3-Cython >= 0.29.36-2
 BuildRequires:	python3-devel >= 1:3.5
 BuildRequires:	python3-modules >= 1:3.5
 BuildRequires:	python3-setuptools
@@ -70,6 +70,9 @@ Dokumentacja API modułu lxml.
 %prep
 %setup -q -n %{module}-%{version}
 %patch0 -p1
+
+# force cython regeneration
+%{__rm} src/lxml/{_elementpath.c,builder.c,etree.c,etree.h,etree_api.h,lxml.etree.h,lxml.etree_api.h,objectify.c,sax.c}
 
 %build
 %if %{with python2}
