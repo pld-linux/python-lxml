@@ -33,6 +33,7 @@ BuildRequires:	python3-devel >= 1:3.5
 BuildRequires:	python3-modules >= 1:3.5
 BuildRequires:	python3-setuptools
 %endif
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
