@@ -69,7 +69,7 @@ Dokumentacja API modułu lxml.
 
 %prep
 %setup -q -n %{module}-%{version}
-%patch0 -p1
+%patch -P 0 -p1
 
 # force cython regeneration
 %{__rm} src/lxml/{_elementpath.c,builder.c,etree.c,etree.h,etree_api.h,lxml.etree.h,lxml.etree_api.h,objectify.c,sax.c}
