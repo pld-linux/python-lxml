@@ -7,6 +7,7 @@
 Summary:	Python 2 binding for the libxml2 and libxslt libraries
 Summary(pl.UTF-8):	Wiązanie Pythona 2 do bibliotek libxml2 i libxslt
 Name:		python-%{module}
+# keep 5.0.x here for python2 support
 Version:	5.0.2
 Release:	1
 License:	BSD
